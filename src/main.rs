@@ -17,6 +17,7 @@ mod web;
 async fn main() {
     let routes_all = Router::new()
         .merge(routes_hello())
+        .merge(web::routes_login::routes())
         .fallback_service(routes_static());
 
     //region: --- Start Server
