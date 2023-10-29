@@ -1,5 +1,7 @@
 #![allow(unused)]
 
+pub use self::error::{Error, Result};
+
 use axum::extract::{Path, Query};
 use axum::response::{Html, IntoResponse};
 use axum::routing::{get, get_service};
@@ -7,6 +9,9 @@ use axum::Router;
 use serde::Deserialize;
 use std::net::SocketAddr;
 use tower_http::services::ServeDir;
+
+mod error;
+mod web;
 
 #[tokio::main]
 async fn main() {
