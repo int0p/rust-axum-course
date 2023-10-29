@@ -9,10 +9,9 @@ use std::net::SocketAddr;
 
 #[tokio::main]
 async fn main(){
-  let routes_hello = Router::new().route(
-    "/hello",
-    get(handler_hello),
-  );
+  let routes_hello = Router::new()
+    .route("/hello",get(handler_hello))
+    .route("/hello2/:name",get(handler_hello2));
   
   //region: --- Start Server
   let addr = SocketAddr::from(([127,0,0,1],8080));
@@ -21,6 +20,7 @@ async fn main(){
   	.serve(routes_hello.into_make_service())
   	.await
   	.unwrap();
+  //endregion: --- Start Server
 }
 
 //region: --- Handler Hello
@@ -29,7 +29,7 @@ async fn main(){
 /// 입력: 웹 쿼리를 HelloParams로 파싱한 값
 /// 출력: HTTP응답
 /// Query(params):Query<HelloParams>
-///     Query: 웹 요청으로부터 쿼리 파라미터 추출
+///     Query: Extracter, 웹 요청으로부터 쿼리 파라미터 추출
 ///     Query<HelloParams>: HelloParams 구조체 형태로 쿼리 파라미터를 파싱
 ///     Query(params): 쿼리 파라미터가 성공적으로 HelloParams로 파싱될 경우 해당 값을 params 변수에 바인딩
 /// IntoResponse: Trait for generating responses. 
@@ -52,4 +52,10 @@ async fn handler_hello(Query(params):Query<HelloParams>)->impl IntoResponse{
     Html(format!("Hello <strong> {name} </strong>"))
 }
 
+// e.g., '/hello2/Mike'
+async fn handler_hello2(Path(name):Path<String>) -> impl IntoResponse{
+    println!("--> {:<12} - handler_hello2 - {name:?}","HANDLER");
+
+    Html(format!("Hello <strong> {name} </strong>"))
+}
 //endregion: --- Handler Hello
