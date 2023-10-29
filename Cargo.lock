@@ -362,16 +362,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d77f7ec81a6d05a3abb01ab6eb7590f6083d08449fe5a1c8b1e620283546ccb7"
 
 [[package]]
-name = "hi"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "axum",
- "httpc-test",
- "tokio",
-]
-
-[[package]]
 name = "http"
 version = "0.2.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -851,6 +841,18 @@ dependencies = [
  "cookie_store 0.20.0",
  "reqwest",
  "url",
+]
+
+[[package]]
+name = "rust-axum-course"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "axum",
+ "httpc-test",
+ "serde",
+ "serde_json",
+ "tokio",
 ]
 
 [[package]]
