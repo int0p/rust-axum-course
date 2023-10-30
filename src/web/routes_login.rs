@@ -17,7 +17,7 @@ async fn api_login(cookies:Cookies,payload:Json<LoginPayload>)->Result<Json<Valu
     }
 
     //FIXME: Implement real auth-token generation/signiture
-    cookies.add(Cookie::new(web::AUTH_TOKEN,"user-1.exp.signature"));
+    cookies.add(Cookie::new(web::AUTH_TOKEN,"user-1.exp.signature")); //format: user-[user-id].[expiration].[signature]
 
     // Create the success body
     let body = Json(json!({

@@ -22,7 +22,7 @@ async fn quick_dev() -> Result<()> {
             "pwd":"welcome"
         })
     );
-    // req_login.await?.print().await?; //얘 없으면 api요청 불가능. 
+    req_login.await?.print().await?; //얘 없으면 api요청 불가능. 
 
     let req_create_ticket = hc.do_post(
         "/api/tickets",
