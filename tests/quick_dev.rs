@@ -11,7 +11,7 @@ async fn quick_dev() -> Result<()> {
 
     // hc.do_get("/hello?name=Jen").await?.print().await?;
 
-    // hc.do_get("/hello2/Mike").await?.print().await?;
+    hc.do_get("/hello2/Mike").await?.print().await?;
 
     // hc.do_get("/src/main.rs").await?.print().await?;
 
@@ -24,6 +24,9 @@ async fn quick_dev() -> Result<()> {
     );
 
     req_login.await?.print().await?;
+
+    hc.do_get("/hello2/Mike").await?.print().await?;
+
 
     Ok(())
 }
