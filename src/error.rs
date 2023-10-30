@@ -4,6 +4,9 @@ pub type Result<T> = core::result::Result<T,Error>;
 #[derive(Debug)]
 pub enum Error{
     LoginFail,
+
+    // -- Model errors
+    TicketDeleteFailIdNotFound {id: u64},
 }
 
 // 주의! server error를 client에게 보여주지 않는다. 
