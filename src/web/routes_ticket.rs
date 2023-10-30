@@ -1,8 +1,23 @@
-use axum::Json;
-use axum::extract::{State, Path};
+use axum::routing::{post, delete};
+use axum::{Json, Router};
+use axum::extract::{State, Path, FromRef};
 
 use crate::model::{ModelController, Ticket,TicketForCreate};
 use crate::Result;
+
+// pass multiple states
+#[derive(Clone,FromRef)]
+struct AppState{
+    mc:ModelController,
+}
+
+pub fn routes(mc: ModelController)-> Router{
+    let app_state = AppState {mc};
+    Router::new()
+        .route("/tickets", post(create_ticket).get(list_tickets))
+        .route("/tickets/:id", delete(delete_ticket))
+        .with_state(app_state) //all of these handlers can get the states
+}
 
 // region:     --- Model Controller ---REST Handlers
 async fn create_ticket(
